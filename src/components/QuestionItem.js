@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types"; 
 
 function QuestionItem({ question }) {
   const { id, prompt, answers, correctIndex } = question;
@@ -21,5 +22,14 @@ function QuestionItem({ question }) {
     </li>
   );
 }
+
+QuestionItem.propTypes = {
+  question: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    prompt: PropTypes.string.isRequired,
+    answers: PropTypes.arrayOf(PropTypes.string).isRequired,
+    correctIndex: PropTypes.number.isRequired,
+  }).isRequired,
+};
 
 export default QuestionItem;
