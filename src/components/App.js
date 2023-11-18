@@ -54,6 +54,32 @@ function App() {
     }
   };
 
+  const handleUpdateCorrectIndex = async (id, correctIndex) => {
+    try {
+      const response = await fetch(`http://localhost:4000/questions/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ correctIndex }),
+      });
+  
+      if (response.ok) {
+        const updatedQuestion = await response.json();
+        setQuestions((prevQuestions) =>
+          prevQuestions.map((question) =>
+            question.id === id ? { ...question, correctIndex } : question
+          )
+        );
+      } else {
+        console.error('Failed to update question:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error updating question:', error);
+    }
+  };
+  
+
   return (
     <main>
       <AdminNavBar onChangePage={setPage} />
@@ -64,6 +90,7 @@ function App() {
         <QuestionList 
           questions={questions}
           onDeleteQuestion={handleDeleteQuestion}
+          onUpdateCorrectIndex={handleUpdateCorrectIndex}
         />
       )}
       
