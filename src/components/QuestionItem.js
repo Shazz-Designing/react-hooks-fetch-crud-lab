@@ -1,14 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types"; 
 
-function QuestionItem({ question }) {
+function QuestionItem({ question, onDeleteQuestion  }) {
   const { id, prompt, answers, correctIndex } = question;
 
-  const options = answers && answers.map((answer, index) => (
+  const options = answers.map((answer, index) => (
     <option key={index} value={index}>
       {answer}
     </option>
   ));
+
+  const handleDelete = () => {
+    onDeleteQuestion(id);
+  };
+
 
   return (
     <li>
@@ -16,9 +21,9 @@ function QuestionItem({ question }) {
       <h5>Prompt: {prompt}</h5>
       <label>
         Correct Answer:
-        <select defaultValue={Number(correctIndex)}>{options}</select>
+        <select defaultValue={correctIndex}>{options}</select>
       </label>
-      <button>Delete Question</button>
+      <button onClick={handleDelete}>Delete Question</button>
     </li>
   );
 }
@@ -27,9 +32,10 @@ QuestionItem.propTypes = {
   question: PropTypes.shape({
     id: PropTypes.number.isRequired,
     prompt: PropTypes.string.isRequired,
-    answers: PropTypes.arrayOf(PropTypes.string),
+    answers: PropTypes.arrayOf(PropTypes.string).isRequired,
     correctIndex: PropTypes.number.isRequired,
   }).isRequired,
+  onDeleteQuestion: PropTypes.func.isRequired,
 };
 
 export default QuestionItem;

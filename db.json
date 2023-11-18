@@ -76,6 +76,17 @@
       ],
       "correctIndex": 3,
       "id": 7
+    },
+    {
+      "prompt": "What is Kenya's Capital city?",
+      "answers": [
+        "Dakar",
+        "Kisumu",
+        "Kampala",
+        "Nairobi"
+      ],
+      "correctIndex": 3,
+      "id": 9
     }
   ]
 }
