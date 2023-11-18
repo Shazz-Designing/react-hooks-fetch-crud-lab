@@ -21,10 +21,6 @@ function App() {
     fetchData();
   }, []); 
 
-  const handleAddQuestion = (newQuestion) => {
-    setQuestions([...questions, newQuestion]);
-  };
-
   const handleDeleteQuestion = async (id) => {
     try {
       await fetch(`http://localhost:4000/questions/${id}`, {
@@ -33,6 +29,28 @@ function App() {
       setQuestions(questions.filter((question) => question.id !== id));
     } catch (error) {
       console.error('Error deleting question:', error);
+    }
+  };
+
+  const handleAddQuestion = async (newQuestion) => {
+    try {
+      const response = await fetch('http://localhost:4000/questions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newQuestion),
+      });
+
+      if (response.ok) {
+        const createdQuestion = await response.json();
+        setQuestions([...questions, createdQuestion]);
+        setPage('List');
+      } else {
+        console.error('Failed to add question:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error adding question:', error);
     }
   };
 
@@ -52,5 +70,6 @@ function App() {
     </main>
   );
 }
+
 
 export default App;
