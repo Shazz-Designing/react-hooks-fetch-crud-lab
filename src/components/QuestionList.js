@@ -7,7 +7,7 @@ function QuestionList({ questions }) {
     <section>
       <h1>Quiz Questions</h1>
       <ul>
-        {questions.map((question) => (
+        {questions && questions.map((question) => (
           <QuestionItem key={question.id} question={question} />
         ))}
       </ul>
@@ -20,7 +20,7 @@ QuestionList.propTypes = {
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       prompt: PropTypes.string.isRequired,
-      answers: PropTypes.arrayOf(PropTypes.string).isRequired,
+      answers: PropTypes.arrayOf(PropTypes.string),
       correctIndex: PropTypes.number.isRequired,
     })
   ).isRequired,

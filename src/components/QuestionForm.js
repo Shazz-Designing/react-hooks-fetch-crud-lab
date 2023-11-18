@@ -20,14 +20,22 @@ function QuestionForm ({ onAddQuestion }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    onAddQuestion(formData);
-    setFormData({
-      prompt: "",
-      answer1: "",
-      answer2: "",
-      answer3: "",
-      answer4: "",
-      correctIndex: 0,
+  
+    const newQuestion = {
+      prompt: formData.prompt,
+      answers: [formData.answer1, formData.answer2, formData.answer3, formData.answer4],
+      correctIndex: parseInt(formData.correctIndex, 10),
+    };
+
+  onAddQuestion(newQuestion);
+  
+  setFormData({
+    prompt: "",
+    answer1: "",
+    answer2: "",
+    answer3: "",
+    answer4: "",
+    correctIndex: 0,
     });
   }
 

@@ -68,11 +68,13 @@
     },
     {
       "prompt": "When do we celebrate Christmas?",
-      "answer1": "25th June",
-      "answer2": "23rd April",
-      "answer3": "9th August",
-      "answer4": "25th December",
-      "correctIndex": "3",
+      "answers": [
+        "25th June",
+        "23rd April",
+        "9th August",
+        "25th December"
+      ],
+      "correctIndex": 3,
       "id": 7
     }
   ]
